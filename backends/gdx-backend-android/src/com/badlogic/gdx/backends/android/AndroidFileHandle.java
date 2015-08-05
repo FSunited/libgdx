@@ -226,6 +226,7 @@ public class AndroidFileHandle extends FileHandle {
 
 	public File file () {
 		if (type == FileType.Local) return new File(Gdx.files.getLocalStoragePath(), file.getPath());
+		else if (type == FileType.Cache) return new File(Gdx.files.getLocalCachePath(), file.getPath());
 		return super.file();
 	}
 

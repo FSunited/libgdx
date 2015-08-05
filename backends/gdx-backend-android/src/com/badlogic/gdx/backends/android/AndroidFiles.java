@@ -27,17 +27,20 @@ import com.badlogic.gdx.files.FileHandle;
 public class AndroidFiles implements Files {
 	protected final String sdcard = Environment.getExternalStorageDirectory().getAbsolutePath() + "/";
 	protected final String localpath;
+	protected final String cachepath;
 
 	protected final AssetManager assets;
 
 	public AndroidFiles (AssetManager assets) {
 		this.assets = assets;
 		localpath = sdcard;
+		cachepath = sdcard;
 	}
 
-	public AndroidFiles (AssetManager assets, String localpath) {
+	public AndroidFiles (AssetManager assets, String localpath, String cachepath) {
 		this.assets = assets;
 		this.localpath = localpath.endsWith("/") ? localpath : localpath + "/";
+		this.cachepath = cachepath.endsWith("/") ? cachepath : cachepath + "/";
 	}
 
 	@Override
@@ -89,4 +92,15 @@ public class AndroidFiles implements Files {
 	public boolean isLocalStorageAvailable () {
 		return true;
 	}
+	
+	@Override
+	public FileHandle cache (String path) {
+		return new AndroidFileHandle(null, path, FileType.Cache);
+	}
+
+	@Override
+	public String getLocalCachePath () {
+		return cachepath;
+	}
+
 }

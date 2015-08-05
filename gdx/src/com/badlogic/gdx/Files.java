@@ -43,6 +43,11 @@ public interface Files {
 		/** Path that is a fully qualified, absolute filesystem path. To ensure portability across platforms use absolute files only
 		 * when absolutely (heh) necessary. */
 		Absolute,
+		
+		/**
+		 * Cache directory in Local
+		 */
+		Cache,
 
 		/** Path relative to the private files directory on Android and to the application's root directory on the desktop. */
 		Local;
@@ -65,6 +70,8 @@ public interface Files {
 
 	/** Convenience method that returns a {@link FileType#Absolute} file handle. */
 	public FileHandle absolute (String path);
+	
+	public FileHandle cache (String path);
 
 	/** Convenience method that returns a {@link FileType#Local} file handle. */
 	public FileHandle local (String path);
@@ -76,6 +83,8 @@ public interface Files {
 	/** Returns true if the external storage is ready for file IO. Eg, on Android, the SD card is not available when mounted for use
 	 * with a PC. */
 	public boolean isExternalStorageAvailable ();
+	
+	public String getLocalCachePath ();
 
 	/** Returns the local storage path directory. This is the private files directory on Android and the directory of the jar on the
 	 * desktop. */
